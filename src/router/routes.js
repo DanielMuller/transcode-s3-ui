@@ -20,6 +20,14 @@ const routes = [
         meta: {
           requiresAuth: false
         }
+      },
+      {
+        name: 'upload',
+        path: 'upload',
+        component: () => import('pages/Upload.vue'),
+        meta: {
+          requiresAuth: true
+        }
       }
     ]
   }

@@ -8,6 +8,7 @@
           q-toolbar-title(shrink) Transcode S3
         q-space
         .row.q-gutter-sm
+          q-btn(v-if="signedIn" v-ripple icon="cloud_upload" label="Upload" no-caps no-wrap :to="{name:'upload'}")
           q-btn(v-if="signedIn" v-ripple icon="exit_to_app" label="Sign Out" no-caps no-wrap @click="signOut")
           q-btn(v-if="!signedIn" v-ripple icon="lock" label="Sign In" no-caps no-wrap :to="{name:'auth'}")
     q-page-container
