@@ -1,1 +1,9 @@
-{}
+{
+	"auth": {
+		"filemanagers3c0549768": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	}
+}
