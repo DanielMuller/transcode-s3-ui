@@ -1,6 +1,6 @@
 <template lang="pug">
   q-page.flex.flex-center
-    img(alt="Quasar logo" src="~assets/quasar-logo-full.svg")
+    img(alt="Transcode S3 logo" src="~assets/transcode-s3-full.svg")
 </template>
 
 <script>
