@@ -1,9 +1,9 @@
 {
-  "name": "filemanager-s3",
+  "name": "transcode-s3-ui",
   "version": "0.0.1",
-  "description": "S3 Filemanager",
-  "productName": "filemanager-s3",
-  "cordovaId": "me.danielmuller.filemanager.s3",
+  "description": "UI for S3 Transcoder",
+  "productName": "transcode-s3-ui",
+  "cordovaId": "me.danielmuller.transcode.s3.ui",
   "author": "Daniel Muller <daniel@danielmuller.me>",
   "private": true,
   "scripts": {

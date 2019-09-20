@@ -1,5 +1,5 @@
 {
-    "projectName": "filemanager-s3",
+    "projectName": "transcode-s3-ui",
     "version": "2.0",
     "frontend": "javascript",
     "javascript": {

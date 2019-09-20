@@ -1,6 +1,6 @@
 {
 	"auth": {
-		"filemanagers3c0549768": {
+		"transcodes3uid85245f1": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": []

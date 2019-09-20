@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "filemanagers3c0549768_identitypool_c0549768",
-    "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "filemac0549768",
-    "userPoolName": "filemanagers3c0549768_userpool_c0549768",
+    "identityPoolName": "transcodes3uid85245f1_identitypool_d85245f1",
+    "allowUnauthenticatedIdentities": true,
+    "resourceNameTruncated": "transcd85245f1",
+    "userPoolName": "transcodes3uid85245f1_userpool_d85245f1",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,9 +28,9 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "filemac0549768_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "transcd85245f1_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "resourceName": "filemanagers3c0549768",
+    "resourceName": "transcodes3uid85245f1",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
