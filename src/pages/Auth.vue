@@ -1,11 +1,16 @@
 <template lang="pug">
   q-page(padding).bg-grey-4.row.justify-center
-    amplify-authenticator(:authConfig='authConfig')
+    q-amplify-authenticator.fit(:authConfig='authConfig' style="max-width:460px")
 </template>
 
 <script>
+import * as Authenticator from 'components/authenticator'
+
 export default {
   name: 'Auth',
+  components: {
+    Authenticator
+  },
   beforeCreate () {
     this.$Auth.currentAuthenticatedUser()
       .then(user => {
