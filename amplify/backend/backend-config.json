@@ -5,5 +5,11 @@
 			"providerPlugin": "awscloudformation",
 			"dependsOn": []
 		}
+	},
+	"existingStorage": {
+		"s34f31abc7": {
+			"service": "IAM",
+			"providerPlugin": "awscloudformation"
+		}
 	}
 }

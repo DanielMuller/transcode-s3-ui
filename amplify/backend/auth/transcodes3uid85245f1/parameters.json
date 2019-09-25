@@ -1,6 +1,6 @@
 {
     "identityPoolName": "transcodes3uid85245f1_identitypool_d85245f1",
-    "allowUnauthenticatedIdentities": true,
+    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "transcd85245f1",
     "userPoolName": "transcodes3uid85245f1_userpool_d85245f1",
     "autoVerifiedAttributes": [

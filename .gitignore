@@ -31,3 +31,4 @@ node_modules/
 aws-exports.js
 awsconfiguration.json
 team-provider-info.json
+/amplify/backend/existingStorage/s34f31abc7/parameters.json

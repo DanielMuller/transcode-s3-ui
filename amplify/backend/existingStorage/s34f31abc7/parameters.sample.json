@@ -1,0 +1,6 @@
+{
+  "bucketName": "MyBucket",
+  "authRoleName": {
+      "Ref": "AuthRoleName"
+  }
+}
