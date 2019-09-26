@@ -1,10 +1,14 @@
 <template lang="pug">
-  q-page.flex.flex-center
-    img(alt="Transcode S3 logo" src="~assets/transcode-s3-full.svg")
+  q-page(padding).row.justify-center
+    file-list(path="out/")
 </template>
 
 <script>
+import fileList from 'components/storage/FileList'
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+  components: {
+    fileList
+  }
 }
 </script>
