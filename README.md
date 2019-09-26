@@ -1,26 +1,27 @@
-# filemanager-s3 (filemanager-s3)
+# transcode-s3-ui
 
-S3 Filemanager
+UI for [transcode-s3](https://github.com/DanielMuller/transcode-s3)
 
-## Install the dependencies
+## Install
+This UI depends on [transcode-s3](https://github.com/DanielMuller/transcode-s3), [AWS-amplify](https://aws-amplify.github.io/) and [Quasar](https://quasar.dev/)
+
 ```bash
-npm install
+npm install -g @aws-amplify/cli
+npm install -g @quasar/cli
+git clone https://github.com/DanielMuller/transcode-s3
+cd transcode-s3
+vi stages/production.yml # Keep the upload folder to auto/ and output to out/
+npm i
+npm run deploy
+cd ..
+git clone https://github.com/DanielMuller/transcode-s3-ui
+cd transcode-s3-ui
+cp -a src/storage.sample.js src/storage.js
+cp -a amplify/backend/existingStorage/s34f31abc7/parameters.sample.json amplify/backend/existingStorage/s34f31abc7/parameters.json
+vi src/storage.js # Adapt the Bucket name
+vi amplify/backend/existingStorage/s34f31abc7/parameters.json # Adapt the Bucket name
+npm i
+amplify init # Choose an existing environment: prod
+amplify env checkout prod
+amplify push
 ```
-
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
-
-### Lint the files
-```bash
-npm run lint
-```
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
