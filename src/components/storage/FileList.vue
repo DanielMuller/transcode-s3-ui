@@ -35,7 +35,8 @@ export default {
     return {
       fileList: [],
       s3: null,
-      playSrc: null
+      playSrc: null,
+      userId: null
     }
   },
   mounted () {
@@ -48,6 +49,7 @@ export default {
     this.$Auth.currentCredentials()
       .then(credentials => {
         this.credentials = this.$Auth.essentialCredentials(credentials)
+        this.userId = credentials.identityId
         this.s3 = new S3({ credentials: this.credentials })
         this.fetchKeys()
       })
@@ -61,6 +63,13 @@ export default {
         }
       }
       return Object.assign(defaults, this.filePickerConfig || {})
+    },
+    userIdPath () {
+      let path = this.userId
+      if (this.userId.substr(this.userId.length - 1) !== '/') {
+        path = this.userId + '/'
+      }
+      return path
     }
   },
   methods: {
@@ -100,14 +109,15 @@ export default {
       return this.s3.getSignedUrl('getObject', params)
     },
     fetchKeys () {
+      let prefix = `${this.options.path}${this.userIdPath}`
       let params = {
         Bucket: storage.bucket,
         MaxKeys: this.options.storageOptions.maxKeys,
-        Prefix: this.options.path
+        Prefix: prefix
       }
       return this.listAllKeys(params).then(res => {
         res.forEach(item => {
-          item.displayName = item.Key.replace(this.options.path, '')
+          item.displayName = item.Key.replace(prefix, '')
           item.source = item.displayName.split('/')[0]
           item.sizeLabel = humanStorageSize(item.Size)
           item.dimensions = item.displayName.match(/.*-(\d+p)\.mp4/)[1]

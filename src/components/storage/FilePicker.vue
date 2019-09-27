@@ -43,7 +43,8 @@ export default {
       credentials: null,
       prefix: null,
       uploadDisabled: true,
-      clearClick: false
+      clearClick: false,
+      userId: null
     }
   },
   mounted () {
@@ -56,6 +57,7 @@ export default {
     this.$Auth.currentCredentials()
       .then(credentials => {
         this.credentials = this.$Auth.essentialCredentials(credentials)
+        this.userId = credentials.identityId
       })
   },
   computed: {
@@ -177,8 +179,13 @@ export default {
       if (!this.options.storageOptions.contentType) {
         this.options.storageOptions.contentType = this.file.type
       }
+      let userIdPath = this.userId
+      if (this.userId.substr(this.userId.length - 1) !== '/') {
+        userIdPath = this.userId + '/'
+      }
+
       const name = this.options.defaultName ? this.options.defaultName : this.file.name
-      this.s3ImagePath = `${this.options.path}${name}`
+      this.s3ImagePath = `${this.options.path}${userIdPath}${name}`
       this.file.__progress = 0
       this.file.__uploaded = 0
       this.file.__status = 'idle'
