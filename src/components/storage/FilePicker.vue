@@ -5,7 +5,7 @@
       input.filePicker__input(ref="filePickerInput" type="file" title="" @change="pick" :accept="options.accept")
       div.rounded-borders.filePicker__active(v-if="!file")
         q-icon.fit(name="cloud_upload" style="font-size: 6em")
-      q-list(v-if="file")
+      q-list.fileItem__active(v-if="file")
         q-item(dense)
           q-item-section.cursor-pointer(v-if="file.__status=='uploaded'" avatar @click="completeFileUpload")
             q-icon(name="check" color="positive")
@@ -59,6 +59,14 @@ export default {
         this.credentials = this.$Auth.essentialCredentials(credentials)
         this.userId = credentials.identityId
       })
+    window.addEventListener('dragover', function (e) {
+      e = e || event
+      e.preventDefault()
+    }, false)
+    window.addEventListener('drop', function (e) {
+      e = e || event
+      e.preventDefault()
+    }, false)
   },
   computed: {
     options () {
@@ -86,22 +94,52 @@ export default {
         this.$el.getElementsByClassName('filePicker__input')[0]
     },
     __onDragEnter (e) {
-      const el = this.$el.getElementsByClassName('filePicker__active')[0]
-      el.classList.add('filePicker__hover')
+      let el = this.$el.getElementsByClassName('filePicker__active')[0]
+      if (el) {
+        el.classList.add('filePicker__hover')
+      } else {
+        el = this.$el.getElementsByClassName('fileItem__active')[0]
+        if (el) {
+          let display = this.inProgress ? 'busy' : 'hover'
+          el.classList.add(`fileItem__${display}`)
+        }
+      }
       stopAndPrevent(e)
     },
     __onDragOver (e) {
-      const el = this.$el.getElementsByClassName('filePicker__active')[0]
-      el.classList.add('filePicker__hover')
+      let el = this.$el.getElementsByClassName('filePicker__active')[0]
+      if (el) {
+        el.classList.add('filePicker__hover')
+      } else {
+        el = this.$el.getElementsByClassName('fileItem__active')[0]
+        if (el) {
+          let display = this.inProgress ? 'busy' : 'hover'
+          el.classList.add(`fileItem__${display}`)
+        }
+      }
       stopAndPrevent(e)
     },
     __onDragLeave (e) {
-      const el = this.$el.getElementsByClassName('filePicker__active')[0]
-      el.classList.remove('filePicker__hover')
+      let el = this.$el.getElementsByClassName('filePicker__active')[0]
+      if (el) {
+        el.classList.remove('filePicker__hover')
+      } else {
+        el = this.$el.getElementsByClassName('fileItem__active')[0]
+        if (el) {
+          el.classList.remove('fileItem__hover')
+          el.classList.remove('fileItem__busy')
+        }
+      }
       stopAndPrevent(e)
     },
     __onDrop (e) {
       stopAndPrevent(e)
+      let el = this.$el.getElementsByClassName('fileItem__active')[0]
+      if (el) {
+        el.classList.remove('fileItem__hover')
+        el.classList.remove('fileItem__busy')
+      }
+
       let files = e.dataTransfer.files
 
       if (files.length > 0 && !this.inProgress) {
@@ -228,5 +266,11 @@ export default {
     &__hover
       border-color: $primary
       color: $primary
-
+  .fileItem
+    &__hover
+      opacity: 0.3
+    &__busy
+      cursor: no-drop
+      color: $red-9
+      background-color: $red-1
 </style>
