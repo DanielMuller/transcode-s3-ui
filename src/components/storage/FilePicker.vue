@@ -77,6 +77,19 @@ export default {
         storageOptions: {}
       }
       return Object.assign(defaults, this.filePickerConfig || {})
+    },
+    extensions () {
+      if (this.filePickerConfig.accept !== void 0) {
+        return this.filePickerConfig.accept.split(',').map(ext => {
+          ext = ext.trim()
+          // support "image/*"
+          if (ext.endsWith('/*')) {
+            ext = ext.slice(0, ext.length - 1)
+          }
+          return ext
+        })
+      }
+      return null
     }
   },
   methods: {
@@ -214,6 +227,21 @@ export default {
         this.file = file[0]
       }
       if (!this.file) { return }
+      // Filter on accept
+      if (this.filePickerConfig.accept !== void 0) {
+        let valid = this.extensions.some(ext => this.file.type.toUpperCase().startsWith(ext.toUpperCase()) || this.file.name.toUpperCase().endsWith(ext.toUpperCase()))
+        if (!valid) {
+          this.file = null
+          this.$q.notify({
+            icon: 'warning',
+            message: 'Invalid File Type',
+            color: 'negative',
+            position: 'center'
+          })
+          return
+        }
+      }
+
       if (!this.options.storageOptions.contentType) {
         this.options.storageOptions.contentType = this.file.type
       }
