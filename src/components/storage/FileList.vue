@@ -100,7 +100,7 @@ export default {
       let params = {
         Bucket: storage.bucket,
         Key: file.Key,
-        Expires: 20
+        Expires: 600
       }
       if (download) {
         let filename = path.basename(file.Key)
