@@ -43,7 +43,7 @@ export default {
       credentials: null,
       prefix: null,
       uploadDisabled: true,
-      clearClick: false,
+      inProgress: false,
       userId: null
     }
   },
@@ -73,8 +73,7 @@ export default {
   },
   methods: {
     pickFile (e) {
-      if (this.clearClick) {
-        this.clearClick = false
+      if (this.inProgress) {
         return
       }
       if (this.editable) {
@@ -105,7 +104,7 @@ export default {
       stopAndPrevent(e)
       let files = e.dataTransfer.files
 
-      if (files.length > 0) {
+      if (files.length > 0 && !this.inProgress) {
         this.pick(null, files)
       }
     },
@@ -133,6 +132,7 @@ export default {
     },
     upload: function () {
       this.uploadDisabled = true
+      this.inProgress = true
       const s3 = new S3({ credentials: this.credentials, useAccelerateEndpoint: storage.useAccelerateEndpoint })
 
       let options = null
@@ -192,7 +192,7 @@ export default {
       this.uploadDisabled = false
     },
     completeFileUpload: function () {
-      this.clearClick = true
+      this.inProgress = false
       this.file = null
       this.s3ImageFile = null
       this.$refs.filePickerInput.value = null
